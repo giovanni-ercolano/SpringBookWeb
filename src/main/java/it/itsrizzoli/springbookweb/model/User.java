@@ -1,9 +1,10 @@
 package it.itsrizzoli.springbookweb.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import it.itsrizzoli.springbookweb.controller.Book;
+import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -14,6 +15,9 @@ public class User {
     private String surname;
     private String username;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Book> books = new HashSet<>();
 
     public User(){}
     public User(String name, String surname, String username, String password) {

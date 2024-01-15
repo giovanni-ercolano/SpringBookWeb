@@ -1,5 +1,6 @@
 package it.itsrizzoli.springbookweb.controller;
 
+import it.itsrizzoli.springbookweb.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,6 +23,18 @@ public class Book {
 
     @Size(min=0, max=30)
     String description;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Book(){}
     public Book(String title, String author, String description) {
