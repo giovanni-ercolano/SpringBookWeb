@@ -1,6 +1,8 @@
 package it.itsrizzoli.springbookweb.controller;
 
+import it.itsrizzoli.springbookweb.model.BookRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 @Controller
 public class BookController {
 
+    @Autowired
+    private BookRepository bookRepository;
     static ArrayList<Book> books = new ArrayList<>();
 
     @GetMapping("/createBook")
@@ -24,9 +28,8 @@ public class BookController {
         if(bindingResult.hasErrors()){
             return "newBook";
         }
-        books.add(book);
-        System.out.println("newBook" + book.toString());
-        //model.addAttribute("libri",books);
+        bookRepository.save(new Book(book.title,book.author,book.description));
+        model.addAttribute("libri",books);
         return "redirect:/home";
     }
 }

@@ -1,6 +1,9 @@
 package it.itsrizzoli.springbookweb.controller;
 
+import it.itsrizzoli.springbookweb.model.User;
+import it.itsrizzoli.springbookweb.model.UserRepository;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 @Controller
 public class UserController {
+
+    @Autowired
+    private UserRepository userRepository;
     ArrayList<PersonForm> users = new ArrayList<>();
 
     @GetMapping("/registration")
@@ -22,7 +28,7 @@ public class UserController {
         if(bindingResult.hasErrors()){
             return "registrationUser";
         }
-        users.add(personaForm);
+        userRepository.save(new User(personaForm.name,personaForm.surname,personaForm.username,personaForm.password));
         return "redirect:/login";
     }
 
@@ -33,15 +39,10 @@ public class UserController {
 
     @PostMapping("/postLogin")
     public String postLogin(LoginForm loginForm) {
-        boolean b = false;
 
-        for (PersonForm pf : users){
-            if(pf.username.equals(loginForm.username) && pf.password.equals(loginForm.password)){
-                b = true;
-            }
-        }
+        User user = userRepository.login(loginForm.username,loginForm.password);
 
-        if(b){
+        if(user != null){
             return "redirect:/home";
         }else{
             return "loginUser";
