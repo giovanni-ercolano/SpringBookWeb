@@ -1,5 +1,6 @@
 package it.itsrizzoli.springbookweb.controller;
 
+import it.itsrizzoli.springbookweb.model.Book;
 import it.itsrizzoli.springbookweb.model.BookRepository;
 import it.itsrizzoli.springbookweb.model.User;
 import it.itsrizzoli.springbookweb.model.UserRepository;
@@ -73,5 +74,47 @@ public class UserController {
         return "redirect:/login";
     }
 
+    @GetMapping("/profile")
+    public String showProfilo(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+
+        return "profile";
+    }
+
+    @GetMapping("/editUser")
+    public String mostraModificaForm(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user);
+        return "editUser";
+    }
+
+    @PostMapping("/editPostUser")
+    public String postModificaForm(User user, HttpSession session) {
+        User editUser = (User) session.getAttribute("user");
+        editUser.setName(user.getName());  
+        editUser.setSurname(user.getSurname());
+        editUser.setUsername(user.getUsername());
+        editUser.setPassword(user.getPassword());
+
+        userRepository.save(editUser);
+
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/delete")
+    public String removeUser(HttpSession session){
+        User user = (User) session.getAttribute("user");
+
+        for (Book book : bookRepository.findByUserId(user.getId())) {
+            book.setUser(null);
+            bookRepository.save(book);
+        }
+
+        userRepository.delete(user);
+        session.setAttribute("user",null);
+
+        return "redirect:/registration";
+    }
 
 }

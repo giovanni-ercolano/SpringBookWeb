@@ -81,7 +81,7 @@ public class BookController {
             libro.setTitle(book.getTitle());
             libro.setAuthor(book.getAuthor());
             libro.setDescription(book.getDescription());
-            System.out.printf("sono dentro bookOptional" + libro);
+            System.out.printf("sono dentro bookOptional:" + libro);
             bookRepository.save(libro);
         }
         return "redirect:/home";
