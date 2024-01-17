@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+</head>
+<body>
+
+<h2>Edit Book</h2>
+
+<form th:action="@{editBookPost}" th:object="${book}" method="post">
+    <input type="hidden" id="id" name="id" th:value="${book.id}" />
+    <label for="title">Titolo:</label>
+    <input type="text" id="title" name="title" th:field="*{title}" />
+
+    <label for="author">Autore:</label>
+    <input type="text" id="author" name="author" th:field="*{author}" />
+
+    <label for="description">Descrizione:</label>
+    <textarea id="description" name="description" th:field="*{description}"></textarea>
+
+    <button type="submit">Salva Modifiche</button>
+</form>
+<a href="/home">Torna alla home</a>
+
+</body>
+</html>

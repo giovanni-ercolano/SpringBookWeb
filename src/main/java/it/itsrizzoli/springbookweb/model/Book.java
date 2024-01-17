@@ -1,4 +1,4 @@
-package it.itsrizzoli.springbookweb.controller;
+package it.itsrizzoli.springbookweb.model;
 
 import it.itsrizzoli.springbookweb.model.User;
 import jakarta.persistence.*;
@@ -78,9 +78,11 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", description='" + description + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

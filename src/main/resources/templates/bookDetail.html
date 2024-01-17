@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${bookDT.getTitle()}"></td>
+            <td th:text="${bookDT.getAuthor()}"></td>
+            <td th:text="${bookDT.getDescription()}"></td>
+            <td> <a th:href="@{/remove(bookId=${bookDT.getId()})}"> Rimuovi libro </a></td>
+        </tr>
+        </tbody>
+    </table>
+</head>
+<body>
+
+</body>
+</html>

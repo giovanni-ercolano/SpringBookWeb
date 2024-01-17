@@ -7,23 +7,25 @@
 <body>
 <h1>Home</h1>
 <a href="/createBook">Aggiungi un libro</a>
+<a href="/logout">Logout </a>
 <h2>Libri</h2>
 <table th:if="${not #lists.isEmpty(libri)}">
     <thead>
     <tr>
-        <th>ID</th>
         <th>Title</th>
-        <th>Author</th>
-        <th>Description</th>
+        <th>Dettaglio</th>
+        <th>Modifica</th>
+        <th>Cancella</th>
+
     </tr>
     </thead>
     <tbody>
     <th:block th:each="book : ${libri}">
         <tr >
-            <td th:text="${book.id}"></td>
             <td th:text="${book.title}"></td>
-            <td th:text="${book.author}"></td>
-            <td th:text="${book.description}"></td>
+            <td> <a th:href="@{/detailBook(bookId=${book.getId()})}"> Dettaglio libro </a></td>
+            <td> <a th:href="@{/editBook(bookId=${book.getId()})}"> Modifica libro </a></td>
+            <td> <a th:href="@{/remove(bookId=${book.getId()})}"> Rimuovi libro </a></td>
         </tr>
     </th:block>
     </tbody>

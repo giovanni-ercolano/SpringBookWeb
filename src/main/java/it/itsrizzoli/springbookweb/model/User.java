@@ -1,6 +1,5 @@
 package it.itsrizzoli.springbookweb.model;
 
-import it.itsrizzoli.springbookweb.controller.Book;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
