@@ -1,8 +1,6 @@
 package it.itsrizzoli.springbookweb.controller;
 
-import it.itsrizzoli.springbookweb.model.Book;
-import it.itsrizzoli.springbookweb.model.BookRepository;
-import it.itsrizzoli.springbookweb.model.User;
+import it.itsrizzoli.springbookweb.model.*;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -21,6 +20,9 @@ public class BookController {
 
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private UserBookRepository userBookRepository;
     static ArrayList<Book> books = new ArrayList<>();
 
     @GetMapping("/createBook")
@@ -37,7 +39,7 @@ public class BookController {
             return "newBook";
         }
         System.out.println("Controllo sessione:" + session.getAttribute("user"));
-        book.setUser(user);
+
         bookRepository.save(book);
         return "redirect:/home";
     }
@@ -81,19 +83,49 @@ public class BookController {
             libro.setTitle(book.getTitle());
             libro.setAuthor(book.getAuthor());
             libro.setDescription(book.getDescription());
+            libro.setPublicationDate(book.getPublicationDate());
+            libro.setPrice(book.getPrice());
             System.out.printf("sono dentro bookOptional:" + libro);
             bookRepository.save(libro);
         }
         return "redirect:/home";
     }
 
-    @GetMapping("/remove")
+    @GetMapping("/removeBook")
     public String removeBook(@RequestParam("bookId") Integer bookId){
         Optional<Book> removeBook = bookRepository.findById(bookId);
 
         if (removeBook.isPresent()) {
             Book book = removeBook.get();
             bookRepository.delete(book);
+        }
+
+        return "redirect:/home";
+    }
+
+    @RequestMapping("/addBooks")
+    public String addBooks(@RequestParam("bookId") Integer bookId,HttpSession session) {
+        Optional<Book> addBook = bookRepository.findById(bookId);
+
+        User user = (User) session.getAttribute("user");
+        Book book = null;
+        if (addBook.isPresent()) {
+            book = addBook.get();
+        }
+        UserBook userBook = new UserBook(book, user);
+        userBookRepository.save(userBook);
+
+        return "redirect:/home";
+    }
+
+    @RequestMapping ("/removeUserBook")
+    public String removeBook(@RequestParam("bookId") Integer bookId,HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        Optional<UserBook> removeBook = userBookRepository.findBooksByUserBooks(user.getId(),bookId);
+
+        if (removeBook.isPresent()) {
+            UserBook userBook = removeBook.get();
+            userBookRepository.delete(userBook);
         }
 
         return "redirect:/home";

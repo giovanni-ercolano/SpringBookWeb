@@ -24,9 +24,35 @@
     <th:block th:each="book : ${libri}">
         <tr >
             <td th:text="${book.title}"></td>
-            <td> <a th:href="@{/detailBook(bookId=${book.getId()})}"> Dettaglio libro </a></td>
-            <td> <a th:href="@{/editBook(bookId=${book.getId()})}"> Modifica libro </a></td>
-            <td> <a th:href="@{/remove(bookId=${book.getId()})}"> Rimuovi libro </a></td>
+            <td> <a th:href="@{/detailBook(bookId=${book.getId()})}"> Detail </a></td>
+            <td> <a th:href="@{/editBook(bookId=${book.getId()})}"> Edit </a></td>
+            <td> <a th:href="@{/removeUserBook(bookId=${book.getId()})}"> Remove </a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+
+<h2>All Books</h2>
+<table th:if="${not #lists.isEmpty(allBooks)}">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Detail</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Add</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="book : ${allBooks}">
+        <tr >
+            <td th:text="${book.getTitle()}"></td>
+            <td> <a th:href="@{/detailBook(bookId=${book.getId()})}"> Book Details  </a></td>
+            <td> <a th:href="@{/editBook(bookId=${book.getId()})}"> Edit book </a></td>
+            <td> <a th:href="@{/removeBook(bookId=${book.getId()})}"> Remove book </a></td>
+            <td> <a th:href="@{/addBooks(bookId=${book.getId()})}"> Add book to your list </a></td>
+            <!-- aggiungere add book-->
         </tr>
     </th:block>
     </tbody>

@@ -2,8 +2,15 @@ package it.itsrizzoli.springbookweb.model;
 
 import it.itsrizzoli.springbookweb.model.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -24,23 +31,26 @@ public class Book {
     @Size(min=0, max=30)
     String description;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    Date publicationDate;
 
-    public User getUser() {
-        return user;
-    }
+    @NotNull
+    @Min(value = 5)
+    @Max(value = 50)
+    Integer price;
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+    @OneToMany(mappedBy = "book")
+    private Set<UserBook> userBooks = new HashSet<>();
 
     public Book(){}
-    public Book(String title, String author, String description) {
+
+    public Book(String title, String author, String description, Date publicationDate, Integer price) {
         this.title = title;
         this.author = author;
         this.description = description;
+        this.publicationDate = publicationDate;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -75,6 +85,22 @@ public class Book {
         this.description = description;
     }
 
+    public Date getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -82,7 +108,9 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", description='" + description + '\'' +
-                ", user=" + user +
+                ", publicationDate=" + publicationDate +
+                ", price=" + price +
+                ", userBooks=" + userBooks +
                 '}';
     }
 }

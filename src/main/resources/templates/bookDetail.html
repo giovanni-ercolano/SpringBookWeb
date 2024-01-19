@@ -10,7 +10,9 @@
             <th>Title</th>
             <th>Author</th>
             <th>Description</th>
-            <th>Delete</th>
+            <th>PublicationDate</th>
+            <th>Price</th>
+            <th>Remove</th>
         </tr>
         </thead>
         <tbody>
@@ -18,7 +20,9 @@
             <td th:text="${bookDT.getTitle()}"></td>
             <td th:text="${bookDT.getAuthor()}"></td>
             <td th:text="${bookDT.getDescription()}"></td>
-            <td> <a th:href="@{/remove(bookId=${bookDT.getId()})}"> Rimuovi libro </a></td>
+            <td th:text="${bookDT.getPublicationDate()}"></td>
+            <td th:text="${bookDT.getPrice()}"></td>
+            <td> <a th:href="@{/removeUserBook(bookId=${bookDT.getId()})}"> Remove book</a></td>
         </tr>
         </tbody>
     </table>

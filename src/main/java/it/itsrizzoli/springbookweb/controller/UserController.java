@@ -64,7 +64,8 @@ public class UserController {
     @GetMapping("/home")
     public String showHome(Model m , HttpSession session) {
         User user = (User) session.getAttribute("user");
-        m.addAttribute("libri",bookRepository.findByUserId(user.getId()));
+        m.addAttribute("libri",bookRepository.findBooksByUserBooks(user.getId()));
+        m.addAttribute("allBooks",bookRepository.findAll());
         return "home";
     }
 
@@ -106,10 +107,7 @@ public class UserController {
     public String removeUser(HttpSession session){
         User user = (User) session.getAttribute("user");
 
-        for (Book book : bookRepository.findByUserId(user.getId())) {
-            book.setUser(null);
-            bookRepository.save(book);
-        }
+        //bookRepository.saveAll(bookRepository.findBooksByUserId(user.getId()));
 
         userRepository.delete(user);
         session.setAttribute("user",null);

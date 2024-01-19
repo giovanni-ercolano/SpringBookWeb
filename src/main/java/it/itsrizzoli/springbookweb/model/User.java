@@ -16,7 +16,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private Set<Book> books = new HashSet<>();
+    private Set<UserBook> userBooks = new HashSet<>();
 
     public User(){}
     public User(String name, String surname, String username, String password) {
