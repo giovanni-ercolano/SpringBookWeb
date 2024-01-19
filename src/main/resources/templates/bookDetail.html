@@ -1,33 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Description</th>
-            <th>PublicationDate</th>
-            <th>Price</th>
-            <th>Remove</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td th:text="${bookDT.getTitle()}"></td>
-            <td th:text="${bookDT.getAuthor()}"></td>
-            <td th:text="${bookDT.getDescription()}"></td>
-            <td th:text="${bookDT.getPublicationDate()}"></td>
-            <td th:text="${bookDT.getPrice()}"></td>
-            <td> <a th:href="@{/removeUserBook(bookId=${bookDT.getId()})}"> Remove book</a></td>
-        </tr>
-        </tbody>
-    </table>
-</head>
-<body>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
 
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Description</th>
+        <th>PublicationDate</th>
+        <th>Price</th>
+        <th>Remove</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${bookDT.getTitle()}"></td>
+        <td th:text="${bookDT.getAuthor()}"></td>
+        <td th:text="${bookDT.getDescription()}"></td>
+        <td th:text="${bookDT.getPublicationDate()}"></td>
+        <td th:text="${bookDT.getPrice()}"></td>
+        <td> <a th:href="@{/removeUserBook(bookId=${bookDT.getId()})}"> Remove book</a></td>
+    </tr>
+    </tbody>
+</table>
 </body>
+
 </html>

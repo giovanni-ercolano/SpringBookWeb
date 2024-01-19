@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>home</title>
+    <title>Home</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 10px;
+        }
+
+        a.logout {
+            color: #FF0000;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
+
 <body>
 <h1>Home</h1>
-<a href="/profile">Show your profile</a><br><br>
+<a href="/profile">Show your profile</a>
 <a href="/createBook">Add a new book</a>
-<a href="/logout">Logout</a>
+<a href="/sincronizza">Add books from API</a>
+<a href="/removeAllBooks">Remove all books from database</a>
+<a href="/logout" class="logout">Logout</a>
+
 <h2>Libri</h2>
 <table th:if="${not #lists.isEmpty(libri)}">
     <thead>
@@ -17,12 +59,11 @@
         <th>Detail</th>
         <th>Edit</th>
         <th>Delete</th>
-
     </tr>
     </thead>
     <tbody>
     <th:block th:each="book : ${libri}">
-        <tr >
+        <tr>
             <td th:text="${book.title}"></td>
             <td> <a th:href="@{/detailBook(bookId=${book.getId()})}"> Detail </a></td>
             <td> <a th:href="@{/editBook(bookId=${book.getId()})}"> Edit </a></td>
@@ -41,21 +82,20 @@
         <th>Edit</th>
         <th>Delete</th>
         <th>Add</th>
-
     </tr>
     </thead>
     <tbody>
     <th:block th:each="book : ${allBooks}">
-        <tr >
+        <tr>
             <td th:text="${book.getTitle()}"></td>
-            <td> <a th:href="@{/detailBook(bookId=${book.getId()})}"> Book Details  </a></td>
+            <td> <a th:href="@{/detailBook(bookId=${book.getId()})}"> Book Details </a></td>
             <td> <a th:href="@{/editBook(bookId=${book.getId()})}"> Edit book </a></td>
             <td> <a th:href="@{/removeBook(bookId=${book.getId()})}"> Remove book </a></td>
             <td> <a th:href="@{/addBooks(bookId=${book.getId()})}"> Add book to your list </a></td>
-            <!-- aggiungere add book-->
         </tr>
     </th:block>
     </tbody>
 </table>
 </body>
+
 </html>

@@ -130,4 +130,12 @@ public class BookController {
 
         return "redirect:/home";
     }
+
+    @RequestMapping("/removeAllBooks")
+    public String removeAllBook(HttpSession session) {
+        // Svuota la tabella dei libri
+        bookRepository.deleteAll();
+
+        return "redirect:/home";
+    }
 }

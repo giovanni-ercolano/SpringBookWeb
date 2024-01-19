@@ -15,7 +15,7 @@ public class User {
     private String username;
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<UserBook> userBooks = new HashSet<>();
 
     public User(){}

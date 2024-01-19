@@ -1,51 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Book</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        form {
+            width: 50%;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: calc(100% - 20px);
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        td.error {
+            color: #dc3545;
+        }
+    </style>
 </head>
+
 <body>
 <form action="#" th:action="@{/postStoreBook}" th:object="${book}" method="post">
     <table>
         <tr>
-            <td>Title:</td>
-
-            <td><input type="text" th:field="*{title}" /></td>
-
-            <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</td>
+            <td>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" th:field="*{title}" />
+                <span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span>
+            </td>
         </tr>
         <tr>
-            <td>Author:</td>
-
-            <td><input type="text" th:field="*{author}" /></td>
-
-            <td th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</td>
+            <td>
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" th:field="*{author}" />
+                <span class="error" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</span>
+            </td>
         </tr>
         <tr>
-            <td>Descriptiom:</td>
-
-            <td><input type="text" th:field="*{description}" /></td>
-
-            <td th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</td>
+            <td>
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" th:field="*{description}" />
+                <span class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</span>
+            </td>
         </tr>
         <tr>
-            <td>Publication Date:</td>
-
-            <td><input type="date" th:field="*{publicationDate}" /></td>
-
-            <td th:if="${#fields.hasErrors('publicationDate')}" th:errors="*{publicationDate}">publicationDate Error</td>
+            <td>
+                <label for="publicationDate">Publication Date:</label>
+                <input type="text" id="publicationDate" name="publicationDate" th:field="*{publicationDate}" />
+                <span class="error" th:if="${#fields.hasErrors('publicationDate')}" th:errors="*{publicationDate}">Publication Date Error</span>
+            </td>
         </tr>
         <tr>
-            <td>Price:</td>
-
-            <td><input type="number" th:field="*{price}" /></td>
-
-            <td th:if="${#fields.hasErrors('price')}" th:errors="*{price}">price Error</td>
+            <td>
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" th:field="*{price}" />
+                <span class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
+            </td>
         </tr>
         <tr>
-            <td><button type="submit">Submit</button></td>
+            <td>
+                <button type="submit">Submit</button>
+            </td>
         </tr>
     </table>
 </form>
 </body>
+
 </html>

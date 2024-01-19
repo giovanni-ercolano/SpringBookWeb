@@ -1,51 +1,49 @@
 package it.itsrizzoli.springbookweb.model;
 
-import it.itsrizzoli.springbookweb.model.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Book {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     //@Transient
     private Integer id;
 
     @NotNull
-    @Size(min=2, max=30)
+    @Size(max = 100)
+    @Column(length = 101)
     String title;
 
     @NotNull
-    @Size(min=2, max=50)
+    @Size(max = 100)
+    @Column(length = 101)
     String author;
 
-    @Size(min=0, max=30)
+    @Size(max = 100)
+    @Column(length = 101)
     String description;
 
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    Date publicationDate;
+    @Column(length = 10)
+    @Size(max = 10)
+    String publicationDate;
 
     @NotNull
-    @Min(value = 5)
-    @Max(value = 50)
+//    @Min(value = 5)
+//    @Max(value = 50)
     Integer price;
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<UserBook> userBooks = new HashSet<>();
 
     public Book(){}
 
-    public Book(String title, String author, String description, Date publicationDate, Integer price) {
+    public Book(String title, String author, String description, String publicationDate, Integer price) {
         this.title = title;
         this.author = author;
         this.description = description;
@@ -85,11 +83,11 @@ public class Book {
         this.description = description;
     }
 
-    public Date getPublicationDate() {
+    public String getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate) {
+    public void setPublicationDate(String publicationDate) {
         this.publicationDate = publicationDate;
     }
 
