@@ -36,7 +36,7 @@ Gli utenti possono sincronizzare la propria lista di libri con un'API esterna, c
 
 ## Istruzioni per l'Installazione
 
-###1. Clonare il repository:
+### 1. Clonare il repository:
 
 ```bash
 git clone https://github.com/giovanni-ercolano/SpringBookWeb.git
