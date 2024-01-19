@@ -36,25 +36,25 @@ Gli utenti possono sincronizzare la propria lista di libri con un'API esterna, c
 
 ## Istruzioni per l'Installazione
 
-1. Clonare il repository:
+###1. Clonare il repository:
 
 ```bash
 git clone https://github.com/giovanni-ercolano/SpringBookWeb.git
 ```
 
-# 2. Importare il progetto in un IDE (IntelliJ, Eclipse, ecc.).
+### 2. Importare il progetto in un IDE (IntelliJ, Eclipse, ecc.).
 
-# 3. Configurare le informazioni del database nel file application.properties.
+### 3. Configurare le informazioni del database nel file application.properties.
 
-# 4. Eseguire l'applicazione.
+### 4. Eseguire l'applicazione.
 
-# 5. Accedere all'applicazione tramite un browser all'indirizzo http://localhost:8080.
+### 5. Accedere all'applicazione tramite un browser all'indirizzo http://localhost:8080.
 
 ## Tecnologie Utilizzate
-Spring Boot
-Spring Security
-Thymeleaf (Template Engine)
-Hibernate (ORM)
-MySQL (o database di tua scelta)
+- Spring Boot
+- Spring Security
+- Thymeleaf (Template Engine)
+- Hibernate (ORM)
+- MySQL (o database di tua scelta)
 
 #Nota: Assicurati di avere Java e Maven installati sul tuo sistema prima di eseguire l'applicazione.
