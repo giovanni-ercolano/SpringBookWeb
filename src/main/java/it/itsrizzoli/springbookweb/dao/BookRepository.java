@@ -1,5 +1,6 @@
-package it.itsrizzoli.springbookweb.model;
+package it.itsrizzoli.springbookweb.dao;
 
+import it.itsrizzoli.springbookweb.model.Book;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

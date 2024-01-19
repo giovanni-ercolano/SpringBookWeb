@@ -1,6 +1,8 @@
 package it.itsrizzoli.springbookweb.controller;
 
 import it.itsrizzoli.springbookweb.model.*;
+import it.itsrizzoli.springbookweb.dao.BookRepository;
+import it.itsrizzoli.springbookweb.dao.UserBookRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

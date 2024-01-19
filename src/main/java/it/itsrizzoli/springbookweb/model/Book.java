@@ -38,7 +38,7 @@ public class Book {
 //    @Max(value = 50)
     Integer price;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserBook> userBooks = new HashSet<>();
 
     public Book(){}
