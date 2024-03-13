@@ -44,7 +44,7 @@
 </head>
 
 <body>
-<h1>Home</h1>
+<a href="/home"><h1>Home</h1></a>
 <a href="/profile">Show your profile</a>
 <a href="/createBook">Add a new book</a>
 <a href="/sincronizza">Add books from API</a>
@@ -74,6 +74,12 @@
 </table>
 
 <h2>All Books</h2>
+<div style="margin-bottom: 10px;flex-wrap: wrap">
+    <form action="/searchBooks" method="get">
+        <input type="text" id="search" name="search">
+        <button type="submit">Cerca</button>
+    </form>
+</div>
 <table th:if="${not #lists.isEmpty(allBooks)}">
     <thead>
     <tr>

@@ -11,7 +11,6 @@ public interface UserBookRepository extends CrudRepository<UserBook, Integer> {
 
     @Query("select ub from UserBook ub inner join  Book b on ub.book.id=:bookId and ub.user.id=:userId")
     Optional<UserBook> findBooksByUserBooks(@Param("userId") Integer userId, @Param("bookId") Integer bookId);
-
     //Optional<UserBook> findById(Integer id);
 
 

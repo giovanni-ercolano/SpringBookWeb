@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -101,7 +102,6 @@ public class BookController {
             Book book = removeBook.get();
             bookRepository.delete(book);
         }
-
         return "redirect:/home";
     }
 
@@ -136,8 +136,18 @@ public class BookController {
     @RequestMapping("/removeAllBooks")
     public String removeAllBook(HttpSession session) {
         // Svuota la tabella dei libri
-        bookRepository.deleteAll();
-
+        User user = (User) session.getAttribute("user");
+        if (user!=null){
+            bookRepository.deleteAll();
+        }
         return "redirect:/home";
     }
+
+    @GetMapping("/searchBooks")
+    public String searchBooks(@RequestParam("search") String search, Model model) {
+        List<Book> books = bookRepository.findByTitleContaining(search);
+        model.addAttribute("allBooks", books);
+        return "home";
+    }
+
 }
